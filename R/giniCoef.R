@@ -7,5 +7,5 @@ function(seq.i,samps.i){
     ginTops<-c(ginTops,ginTop.i)
   }#end for i
   gin.out<-sum(ginTops)/((max(Ns)^2)*mean(samps.i))
-  return(gin.out)
+  return(gin.out*10)
 }
