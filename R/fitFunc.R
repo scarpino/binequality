@@ -33,6 +33,7 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
   gini<-c()
   theil<-c()
   mld<-c()
+  sdl<-c()
   
   for(i in 1:length(dist)){
     if(i %% 500 == 0){print(i)}
@@ -95,6 +96,7 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
         est<-c(est,est.i)
         obs.i.obs<-dat[use.i[1],'hin_mean']
         mld.i<-MLD(samps.i)
+        sdl.i<-SDL(samps.i)
       	if(length(obs.i.obs)==0){
       		obs.i.obs<-NA
       	}
@@ -110,6 +112,7 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
         gini<-c(gini,gin.i)
         theil<-c(theil,the.i)
         mld<-c(mld,mld.i)
+        mld<-c(sdl,sdl.i)
       }#end if/else testState!=TRUE
     }#end if/else nrow(int.i)<1
     if(NAgate=='OPEN'){
@@ -133,14 +136,15 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
       gini<-c(gini,NA)
       theil<-c(theil, NA)
       mld<-c(mld,NA)
+      sdl<-c(sdl,NA)
     }#end if NAgate='OPEN'
   }#end loop over dists. for i
   elasp<-Sys.time()-start
   print(elasp)
   cat('for', distName, 'fit across', length(dist), 'distributions','\n', '\n')
   distri<-rep(distName,length(est))
-  datOut<-data.frame(dist,obs,distri,est,vars,cvs,cv2,gini,theil,mld,aics,bics,didCon,logLikes,nparams,medians,sds)
-  colnames(datOut)<-c(ID_name,'obsMean','distribution','estMean','var','cv','cv_sqr','gini','theil','MLD','aic','bic','didConverge','logLikelihood','nparams','median','sd')
+  datOut<-data.frame(dist,obs,distri,est,vars,cvs,cv2,gini,theil,mld,sdl,aics,bics,didCon,logLikes,nparams,medians,sds)
+  colnames(datOut)<-c(ID_name,'obsMean','distribution','estMean','var','cv','cv_sqr','gini','theil','MLD','SDL','aic','bic','didConverge','logLikelihood','nparams','median','sd')
  
   
   #saving quantiles

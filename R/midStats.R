@@ -6,7 +6,8 @@ function(data){
   theils<-c()
   cvs<-c()
   IDs<-c()
-  MLDs <-c ()
+  MLDs <- c()
+  SDLs <- c()
   for(i in unique(data$ID)){
     use.i <- which(data$ID == i)
     dat.i <- rep(data$mids[use.i], times = data$hb[use.i])
@@ -16,6 +17,7 @@ function(data){
     theil.i<-Theil(dat.i)
     cv.i<- var.coeff(dat.i,square=FALSE)
     MLD.i <- MLD(na.omit(dat.i))
+    SDL.i <- SDL(na.omit(dat.i))
     
     IDs<-c(IDs,i)
     means<-c(means,mu.i)
@@ -24,8 +26,9 @@ function(data){
     theils<-c(theils,theil.i)
     cvs<-c(cvs,cv.i)
     MLDs <-c (MLDs, MLD.i)
+    SDLs <- c(SDLs, SDL.i)
   }
   out<-data.frame(IDs,means,medians,ginis,theils,cvs, MLDs)
-  colnames(out)<-c('ID','mean','median','gini','theil','cv','MLD')
+  colnames(out)<-c('ID','mean','median','gini','theil','cv','MLD','SDL')
   return(out)
 }
