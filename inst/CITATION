@@ -1,0 +1,19 @@
+citHeader("To cite", sQuote("binequality"), "in publications, please use:")
+
+citEntry(entry = "unpublished",
+         title = "Methods for estimating inequality from binned incomes: The simplest method is competitive with the most complex",
+         author = personList(
+           as.person("Paul von Hippel"), 
+           as.person("Samuel V. Scarpino"),
+           as.person("Igor Holas")
+           ),
+         note  = "R Package",
+         url   = "http://arxiv.org/abs/1402.4061",
+	 textVersion = paste(
+		"von Hippel P, SV Scarpino, I Holas. (2014) Methods for estimating inequality from binned incomes: The simplest method is competitive with the most complex, http://arxiv.org/abs/1402.4061")
+         )
+
+citFooter("For references to additional papers describing the use of",
+          sQuote("binequality"),
+	  "see", sQuote("help(\"binequality\")."))
+

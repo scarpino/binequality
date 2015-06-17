@@ -1,0 +1,14 @@
+# Export all names
+exportPattern(".")
+
+# Import all packages listed as Imports or Depends
+import(
+  gamlss,
+  gamlss.cens,
+  gamlss.dist
+)
+
+importFrom(survival, Surv)
+importFrom(ineq, Theil)
+importFrom(ineq, Gini)
+importFrom(ineq, var.coeff)
