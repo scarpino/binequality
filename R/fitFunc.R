@@ -112,7 +112,7 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
         gini<-c(gini,gin.i)
         theil<-c(theil,the.i)
         mld<-c(mld,mld.i)
-        mld<-c(sdl,sdl.i)
+        sdl<-c(sdl,sdl.i)
       }#end if/else testState!=TRUE
     }#end if/else nrow(int.i)<1
     if(NAgate=='OPEN'){
