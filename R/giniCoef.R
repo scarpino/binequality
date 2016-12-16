@@ -1,7 +1,7 @@
 giniCoef <-
 function(seq.i,samps.i){
   ginTops<-c()
-  Ns<-seq.i*100
+  Ns<-seq.i*1000
   for(i in 1:length(Ns)){
     ginTop.i<-(2*Ns[i]-max(Ns)-1)*samps.i[i]
     ginTops<-c(ginTops,ginTop.i)

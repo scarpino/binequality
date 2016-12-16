@@ -74,7 +74,7 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LNO,distName=
         NAgate<-'OPEN' 
       }else{
         #quantiles
-        quanParam.i<-getQuantilesParams(fit.i,qFunc, quantiles, linksq, freeParams,c(muStart,sigmaStart, nuStart,tauStart))
+        quanParam.i<-getQuantilesParams(fit.i, qFunc, quantiles, linksq, freeParams,c(muStart,sigmaStart, nuStart,tauStart))
         samps.i<-quanParam.i$samps
         params.i<-quanParam.i$params
         #parameters
