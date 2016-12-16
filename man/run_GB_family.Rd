@@ -8,9 +8,7 @@ A function to fit a parametric distributions to binned data.
 This function fits a series of parametric distributions from the GB family to binned data. 
 }
 \usage{
-run_GB_family(ID, hb, bin_min, bin_max, obs_mean, ID_name, 
-quantiles = seq(0.006,0.996, length.out = 1000), modelsToFit = 
-c('GB2','GG','BETA2','DAGUM','SINGMAD','LNO','WEI','GA','LOGLOG','PARETO2'))
+run_GB_family(ID,hb,bin_min,bin_max,obs_mean,ID_name,quantiles,modelsToFit,return_params)
 }
 \arguments{
   \item{ID}{
@@ -32,10 +30,13 @@ a (non-empty) object containing the mean for each group.  Importantly, ID, bh, b
 a (non-empty) object containing column name for the ID column.
 }
    \item{quantiles}{
-a (non-empty) vector of quantiles for use in calculating metrics.
+a (non-empty) vector of quantiles for use in calculating metrics. The default is seq(0.006,0.996, length.out = 1000).
 }
    \item{modelsToFit}{
-a (non-empty) vector of model names, currently limited to the following distributions GB2, GG, BETA2, DAGUM, SINGMAD, LNO, WEI, GA, LOGLOG, PARETO2.
+a (non-empty) vector of model names, currently limited to the following distributions GB2, GG, BETA2, DAGUM, SINGMAD, LOGNO, WEI, GA, LOGLOG, PARETO2.
+}
+  \item{return_params}{
+a (non-empty) logical indicating whether to retunr the parameters. The default is TRUE.
 }
 }
 \details{
@@ -58,6 +59,6 @@ LNO_WEI_GA <- run_GB_family(ID = TX[,'State'], hb = TX[,'hb'],
 bin_min = TX[,'bin_min'], bin_max = TX[,'bin_max'], obs_mean = 
 rep(NA, length(use_states)), ID_name = "State", quantiles = 
 seq(0.006,0.996, length.out = 1000), modelsToFit = 
-c('LNO','WEI','GA'))
+c('LOGNO','WEI','GA'))
 
 }

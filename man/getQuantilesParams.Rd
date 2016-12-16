@@ -7,7 +7,7 @@ A function to extract the quantiles and parameters
 This extracts the quantiles and parameters. 
 }
 \usage{
-getQuantilesParams(fit.i, qFunc = qLNO, quantiles = seq(0.006, 
+getQuantilesParams(fit.i, qFunc = qLOGNO, quantiles = seq(0.006, 
 0.996, length.out = 1000), linksq = c(identity, exp, NULL, 
 NULL), freeParams, fixedParams)
 }

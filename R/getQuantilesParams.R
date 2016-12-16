@@ -1,5 +1,5 @@
 getQuantilesParams <-
-function(fit.i, qFunc=qLNO, quantiles=seq(0.006,0.996,length.out=1000), linksq=c(identity,exp,NULL,NULL),freeParams, fixedParams){
+function(fit.i, qFunc=qLOGNO, quantiles=seq(0.006,0.996,length.out=1000), linksq=c(identity,exp,NULL,NULL),freeParams, fixedParams){
   if(sum(freeParams==c(TRUE, FALSE, FALSE, FALSE))==4){
     params<-linksq[[1]](fit.i$mu.coefficient)
     if(length(fixedParams)==3){

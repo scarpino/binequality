@@ -10,9 +10,9 @@ ID.
 }
 \usage{
 fitFunc(ID, hb, bin_min, bin_max, obs_mean, ID_name,
-  distribution = LNO, distName = "LNO", links = c(muLink = 
+  distribution = LOGNO, distName = "LNO", links = c(muLink = 
   identity, sigmaLink = log, nuLink = NULL, tauLink = NULL),
-   qFunc = qLNO, quantiles = seq(0.006, 0.996, length.out = 
+   qFunc = qLOGNO, quantiles = seq(0.006, 0.996, length.out = 
    1000), linksq = c(identity, exp, NULL, NULL), con = 
    gamlss.control(c.crit=0.1,n.cyc=200, trace=FALSE), 
    saveQuants = FALSE, muStart = NULL, sigmaStart = NULL,
@@ -116,18 +116,10 @@ data(state_bins)
 
 use_states <- which(state_bins[,'State'] == 'Texas' | state_bins[,'State'] == 'California')
 
-log_normal_fit <- fitFunc(ID = state_bins[use_states,'State'], 
-hb = state_bins[use_states,'hb'], bin_min = 
-state_bins[use_states,'bin_min'], bin_max = 
-state_bins[use_states,'bin_max'], obs_mean = rep(NA, 
-length(use_states)), ID_name = 'State',  distribution = LNO, 
-distName = "LNO", links = c(muLink = identity, sigmaLink = 
-log, nuLink = NULL, tauLink = NULL), qFunc = qLNO, quantiles = 
-seq(0.006, 0.996, length.out = 100), linksq = c(identity, exp, 
-NULL, NULL), con = gamlss.control(c.crit=0.1,n.cyc=200, 
-trace=FALSE), saveQuants = FALSE, muStart = NULL, sigmaStart = 
-NULL, nuStart = NULL, tauStart = NULL, muFix = FALSE, sigmaFix 
-= FALSE, nuFix = FALSE, tauFix = FALSE, freeParams = c(TRUE, 
-TRUE, FALSE, FALSE), smartStart = FALSE, tstamp = 
-as.numeric(Sys.time()))
+ID <- state_bins[use_states,'State']
+hb <- state_bins[use_states,'hb']
+bmin <- state_bins[use_states,'bin_min']
+bmax <- state_bins[use_states,'bin_max']
+omu <- rep(NA, length(use_states))
+fitFunc(ID = ID, hb = hb, bin_min = bmin, bin_max = bmax, obs_mean = omu, ID_name = 'State')
 }
