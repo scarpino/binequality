@@ -1,5 +1,5 @@
 fitFunc <-
-function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LOGNO,distName='LNO',links=c(muLink=identity, sigmaLink=log, nuLink=NULL, tauLink=NULL), qFunc=qLOGNO, quantiles=seq(0.006,0.996,length.out=1000), linksq=c(identity,exp,NULL,NULL), con=gamlss.control(c.crit = 0.1, n.cyc = 200, trace = FALSE), saveQuants=FALSE,muStart=NULL,sigmaStart=NULL, nuStart=NULL,tauStart=NULL,muFix=FALSE, sigmaFix=FALSE,nuFix=FALSE,tauFix=FALSE,freeParams=c(TRUE,TRUE,FALSE,FALSE),smartStart=FALSE, tstamp = as.numeric(Sys.time())){
+function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution="LOGNO",distName='LNO',links=c(muLink="identity", sigmaLink="log", nuLink=NULL, tauLink=NULL), qFunc=qLOGNO, quantiles=seq(0.006,0.996,length.out=1000), linksq=c(identity,exp,NULL,NULL), con=gamlss.control(c.crit = 0.1, n.cyc = 200, trace = FALSE), saveQuants=FALSE, muStart=NULL, sigmaStart=NULL, nuStart=NULL, tauStart=NULL, muFix=FALSE, sigmaFix=FALSE, nuFix=FALSE, tauFix=FALSE, freeParams=c(TRUE,TRUE,FALSE,FALSE), smartStart=FALSE, tstamp = as.numeric(Sys.time())){
   start<-Sys.time()
   
   dat<-data.frame(ID, hb, bin_min, bin_max, obs_mean)
@@ -54,19 +54,37 @@ function(ID, hb, bin_min, bin_max, obs_mean, ID_name, distribution=LOGNO,distNam
       intCensW.i<-makeIntWeight(int.i,hb.i)
       intCens.i<-intCensW.i$int
       
+      cens.raw.i <- cens(distribution, type='interval', local = FALSE)
+      
+      if(sum(grep(pattern = "mu.link", x = deparse(body(fun = cens.raw.i)[2]))) == 1){
+        body(fun = cens.raw.i)[[2]] <- parse(text = gsub(pattern = "substitute(mu.link)", replacement = paste0("'",links[1],"'"), x = deparse(body(fun = cens.raw.i)[[2]]), fixed = TRUE))[[1]]
+      }
+      if(sum(grep(pattern = "sigma.link", x = body(fun = cens.raw.i)[3])) == 1){
+        body(fun = cens.raw.i)[[3]] <-  parse(text = gsub(pattern = "substitute(sigma.link)", replacement = paste0("'",links[2],"'"), x = deparse(body(fun = cens.raw.i)[[3]]), fixed = TRUE))[[1]]
+      }
+      if(length(body(fun = cens.raw.i)) > 3){
+        if(sum(grep(pattern = "nu.link", x = body(fun = cens.raw.i)[[4]])) == 1){
+          body(fun = cens.raw.i)[[4]] <-  parse(text = gsub(pattern = "substitute(nu.link)", replacement = paste0("'",links[4],"'"), x = deparse(body(fun = cens.raw.i)[[4]]), fixed = TRUE))[[1]]
+        }
+      }
+      if(length(body(fun = cens.raw.i)) > 4){
+        if(sum(grep(pattern = "tau.link", x = body(fun = cens.raw.i)[[5]])) == 1){
+          body(fun = cens.raw.i)[[5]] <-  parse(text = gsub(pattern = "substitute(mu.link)", replacement = paste0("'",links[5],"'"), x = deparse(body(fun = cens.raw.i)[[5]]), fixed = TRUE))[[1]]
+        }
+      }
+      
       if(smartStart==TRUE& distName == "GB2"){
         mu.start.i<-as.numeric(int.i[which(hb.i==max(hb.i,na.rm=TRUE))[1],])
         mu.start.i<-mean(c(mu.start.i[1],mu.start.i[2]))
-        mu.start.i<-links[[1]](mu.start.i*3.76)
+        mu.start.i<-log(mu.start.i*3.76)
         if(length(sigmaStart)==0){
-          sigma.start.i<-links[[2]](2.5)
+          sigma.start.i<-log(2.5)
         }else{
           sigma.start.i<-sigmaStart
         }
-        
-        fit.i<-try(gamlss(intCens.i~1,weights=intW.i,family=cens(distribution, mu.link=links[[1]], sigma.link=links[[2]],nu.link=links[[3]], tau.link=links[[4]] ,type='interval'), censmu.start=mu.start.i,sigma.start=sigma.start.i, nu.start=nuStart,tau.start=tauStart,mu.fix=muFix, sigma.fix=sigmaFix,nu.fix=nuFix,tau.fix=tauFix,control=con),silent=TRUE)
+        fit.i<-try(gamlss(intCens.i~1, weights=intW.i, family = cens.raw.i(), censmu.start=mu.start.i, sigma.start=sigma.start.i, nu.start=nuStart,tau.start=tauStart,mu.fix=muFix, sigma.fix=sigmaFix,nu.fix=nuFix,tau.fix=tauFix,control=con),silent=TRUE)
       }else{
-        fit.i<-try(gamlss(intCens.i~1,weights=intW.i,family=cens(distribution, mu.link=links[[1]], sigma.link=links[[2]], nu.link=links[[3]], tau.link=links[[4]] ,type='interval'),mu.start=muStart,sigma.start=sigmaStart, nu.start=nuStart,tau.start=tauStart,mu.fix=muFix, sigma.fix=sigmaFix,nu.fix=nuFix,tau.fix=tauFix,control=con),silent=TRUE)
+        fit.i<-try(gamlss(intCens.i~1,weights=intW.i,family=cens.raw.i(), mu.start=muStart,sigma.start=sigmaStart, nu.start=nuStart,tau.start=tauStart,mu.fix=muFix, sigma.fix=sigmaFix,nu.fix=nuFix,tau.fix=tauFix,control=con),silent=TRUE)
       }#end if/else smartStart
       
       testStateVar <- attr(fit.i, "class")

@@ -33,7 +33,7 @@ a (non-empty) object containing column name for the ID column.
 a (non-empty) vector of quantiles for use in calculating metrics. The default is seq(0.006,0.996, length.out = 1000).
 }
    \item{modelsToFit}{
-a (non-empty) vector of model names, currently limited to the following distributions GB2, GG, BETA2, DAGUM, SINGMAD, LOGNO, WEI, GA, LOGLOG, PARETO2.
+a (non-empty) vector of model names as characters, currently limited to the following distributions GB2, GG, BETA2, DAGUM, SINGMAD, LOGNO, WEI, GA, LOGLOG, PARETO2.
 }
   \item{return_params}{
 a (non-empty) logical indicating whether to retunr the parameters. The default is TRUE.

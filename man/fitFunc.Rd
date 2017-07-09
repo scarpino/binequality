@@ -10,8 +10,8 @@ ID.
 }
 \usage{
 fitFunc(ID, hb, bin_min, bin_max, obs_mean, ID_name,
-  distribution = LOGNO, distName = "LNO", links = c(muLink = 
-  identity, sigmaLink = log, nuLink = NULL, tauLink = NULL),
+  distribution = "LOGNO", distName = "LNO", links = c(muLink = 
+  "identity", sigmaLink = "log", nuLink = NULL, tauLink = NULL),
    qFunc = qLOGNO, quantiles = seq(0.006, 0.996, length.out = 
    1000), linksq = c(identity, exp, NULL, NULL), con = 
    gamlss.control(c.crit=0.1,n.cyc=200, trace=FALSE), 
@@ -41,13 +41,13 @@ a (non-empty) object containing the mean for each group.  Importantly, ID, bh, b
 a (non-empty) object containing column name for the ID column.
 }
    \item{distribution}{
-a (non-empty) gamlss function for fitting a GAMLSS.
+a (non-empty) character naming a gamlss family.
 }
   \item{distName}{
 a (non-empty) character object with the name of the distribution.
 }
   \item{links}{
-a (non-empty) list of link functions with the following items: muLink, sigmaLink, nuLink, and tauLink.
+a (non-empty) vector of link characters naming functions with the following items: muLink, sigmaLink, nuLink, and tauLink.
 }
   \item{qFunc}{
 a (non-empty)gamlss function for calculating quantiles, this should match the distribution in distribution.
