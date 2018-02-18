@@ -1,16 +1,23 @@
 citHeader("To cite", sQuote("binequality"), "in publications, please use:")
 
-citEntry(entry = "unpublished",
-         title = "Methods for estimating inequality from binned incomes: The simplest method is competitive with the most complex",
-         author = personList(
+citEntry(entry = "article",
+        doi = {"10.1177/0081175015599807"},
+        url = {"doi.org/10.1177/0081175015599807"},
+        year  = {"2016"},
+        month = {"jul"},
+        publisher = {"SAGE Publications"},
+        volume = {"46"},
+        number = {"1"},
+        pages = {"212--251"},
+        author = personList(
            as.person("Paul von Hippel"), 
            as.person("Samuel V. Scarpino"),
            as.person("Igor Holas")
            ),
-         note  = "R Package",
-         url   = "http://arxiv.org/abs/1402.4061",
-	 textVersion = paste(
-		"von Hippel P, SV Scarpino, I Holas. (2014) Methods for estimating inequality from binned incomes: The simplest method is competitive with the most complex, http://arxiv.org/abs/1402.4061")
+        title = {"Robust Estimation of Inequality from Binned Incomes"},
+        journal = {"Sociological Methodology"},
+	      textVersion = paste(
+		 "Von Hippel, P. T., Scarpino, S. V., & Holas, I. (2016). Robust estimation of inequality from binned incomes. Sociological Methodology, 46(1), 212-251.")
          )
 
 citFooter("For references to additional papers describing the use of",

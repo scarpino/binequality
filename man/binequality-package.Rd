@@ -12,8 +12,8 @@ Methods for model selection, model averaging, and calculating metrics, such as t
 \tabular{ll}{
 Package: \tab binequality\cr
 Type: \tab Package\cr
-Version: \tab 1.0.2\cr
-Date: \tab 2017-07-09\cr
+Version: \tab 1.0.3\cr
+Date: \tab 2018-02-18\cr
 License: \tab GPL (>= 3.0)\cr
 }
 The datasets are: state_bins, county_bins, and school_district_bins.
@@ -27,10 +27,10 @@ Type ?<function> to see examples of the function's use, e.g. ?getMids
 \author{
 Samuel V. Scarpino, Paul von Hippel, and Igor Holas 
 
-Maintainer: Samuel V. Scarpino <scarpino@utexas.edu>
+Maintainer: Samuel V. Scarpino <s.scarpino@northeastern.edu>
 }
 \references{
-FIXME - references
+Von Hippel, P. T., Scarpino, S. V., & Holas, I. (2016). Robust estimation of inequality from binned incomes. Sociological Methodology, 46(1), 212-251.
 }
 \keyword{ package }
 \seealso{
