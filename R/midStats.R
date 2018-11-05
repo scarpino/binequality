@@ -28,7 +28,7 @@ function(data){
     MLDs <-c (MLDs, MLD.i)
     SDLs <- c(SDLs, SDL.i)
   }
-  out<-data.frame(IDs,means,medians,ginis,theils,cvs, MLDs)
-  colnames(out)<-c('ID','mean','median','gini','theil','cv','MLD','SDL')
+  out<-data.frame(IDs,means,medians,ginis,theils,cvs, MLDs,SDLs)
+  colnames(out)<-c('ID','mean','median','gini','theil','cv','MLD','SLD')
   return(out)
 }

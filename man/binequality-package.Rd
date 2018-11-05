@@ -12,8 +12,8 @@ Methods for model selection, model averaging, and calculating metrics, such as t
 \tabular{ll}{
 Package: \tab binequality\cr
 Type: \tab Package\cr
-Version: \tab 1.0.3\cr
-Date: \tab 2018-02-18\cr
+Version: \tab 1.0.4\cr
+Date: \tab 2018-11-05\cr
 License: \tab GPL (>= 3.0)\cr
 }
 The datasets are: state_bins, county_bins, and school_district_bins.

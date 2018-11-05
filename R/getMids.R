@@ -6,6 +6,7 @@ function(ID, hb, lb, ub, alpha_bound = 10/9){
 	alpha.out <- c()
 	ID.out <- c()
 	hb.out <- c()
+	counter <- 0 #this is to ensure the unbounded alpha warning only fires once
 	for(id in unique(ID)){
 		use.id <- which(ID == id & hb >0)
   		open.lb <- which(is.na(lb[use.id])==TRUE)
@@ -35,7 +36,10 @@ function(ID, hb, lb, ub, alpha_bound = 10/9){
     			alpha<-a.num/a.denom
     
     			if(length(alpha_bound) == 0){
-    				warning('alpha is unbounded', '\n')
+    			  if(counter == 0){
+    			    cat('alpha is unbounded', '\n')
+    			    counter <- 1
+    			  }
     			}else{
     				alpha<-max(alpha, alpha_bound)
     			}

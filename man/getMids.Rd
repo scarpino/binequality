@@ -30,7 +30,7 @@ A numeric value indicating the bound on alpha for determining the midpoint of th
 For all non-censored bins, ie real number upper and lower bounds, the midpoint is simply the arithemtic mean of the bounds.  This assumes the number of observations are normally distributed in each bin.  However, for the right-censored bin we relax this assumption when calcuting the bin midpoint. FIXME - say something about the method we use to calculate midpoint of the upper bin. 
 }
 \value{
-returns a list with the following elements: 
+returns a list with the following elements: mids (a data frame with the midpoint information needed for the midStats function), the "c" values, and "alpha" values from the model fit.
 }
 \references{
 FIXME - references
@@ -45,5 +45,4 @@ state_bins[,'bin_max'], alpha_bound = 10/9)
 bin_mids_unbound <- getMids(ID = state_bins[,'State'], hb = 
 state_bins[,'hb'], lb = state_bins[,'bin_min'], ub = 
 state_bins[,'bin_max'], alpha_bound = numeric(0))
-
 }
